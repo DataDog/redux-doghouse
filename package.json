@@ -22,6 +22,16 @@
     "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack",
     "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DataDog/redux-doghouse.git"
+  },
+  "keywords": [
+    "redux",
+    "scope",
+    "doghouse",
+    "react"
+  ],
   "author": "Datadog <dev@datadog.com> (http://www.datadog.com)",
   "contributors": [
     "Zacqary Adam Xeper <zacqary@datadog.com> (https://github.com/zacqary)"
