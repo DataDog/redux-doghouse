@@ -1,0 +1,46 @@
+{
+  "name": "redux-doghouse",
+  "version": "1.0.0",
+  "description": "Scoping helpers for building reusable components with Redux",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
+  "scripts": {
+    "clean": "rimraf lib dist es",
+    "lint": "eslint src",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "npm run clean && npm run build",
+    "build": "npm run build:commonjs && npm run build:umd && npm run build:umd:min && npm run build:es",
+    "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack",
+    "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack"
+  },
+  "author": "Datadog <dev@datadog.com> (http://www.datadog.com)",
+  "contributors": [
+    "Zacqary Adam Xeper <zacqary@datadog.com> (https://github.com/zacqary)"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "4.16.4"
+  },
+  "peerDependencies": {
+    "redux": "3.x"
+  },
+  "devDependencies": {
+    "babel-cli": "6.16.0",
+    "babel-eslint": "7.0.0",
+    "babel-loader": "6.2.5",
+    "babel-preset-es2015": "6.16.0",
+    "babel-preset-stage-3": "6.17.0",
+    "cross-env": "3.1.1",
+    "eslint": "3.7.1",
+    "redux": "3.6.0"
+  }
+}
