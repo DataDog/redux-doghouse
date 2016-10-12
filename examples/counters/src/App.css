@@ -1,0 +1,60 @@
+.App {
+  text-align: center;
+}
+
+.App-controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.App-counters {
+    display: flex;
+    width: 620px;
+    margin: auto;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.Counter {
+    display: flex;
+    width: 128px;
+    height: 128px;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+
+.Counter-amount {
+    display: block;
+    font-size: 128px;
+    line-height: 128px;
+}
+
+button {
+    background: #774aa4;
+    border: 1px solid #694191;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+button:hover {
+    filter: brightness(130%);
+}
+button:active {
+    filter: brightness(110%) hue-rotate(40deg);
+}
+
+.Counter-button {
+    flex: 1 1 auto;
+    margin: 4px;
+    height: 48px;
+    width: 52px;
+    box-sizing: border-box;
+}

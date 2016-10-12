@@ -1,5 +1,5 @@
 import { memoize } from './helpers/memoize';
-import { mapObject, isNull, isUndefined, isFunction } from 'lodash';
+import { mapValues, isNull, isUndefined, isFunction } from 'lodash';
 
 import * as object from './helpers/object-shim';
 
@@ -17,7 +17,7 @@ const scopeActionDeep = (actionCreator, id) => {
         case 'function':
             return scopeAction(actionCreator, id);
         case 'object':
-            return mapObject(actionCreator, c => scopeActionDeep(c, id));
+            return mapValues(actionCreator, c => scopeActionDeep(c, id));
         default:
             return actionCreator;
     }

@@ -8,8 +8,10 @@ import * as object from './helpers/object-shim';
 const bindScopedActionFactory = (creator, dispatch, bindFn) => {
     if (creator instanceof ScopedActionFactory) {
         // ScopedActionFactories shouldn't bind yet; they should return a
-        // function which will bind them once they're passed a scope ID.
-        return id => bindFn(creator.scope(id), dispatch);
+        // clone which will bind them once their scope() method is called
+        const boundFactory = new ScopedActionFactory();
+        boundFactory.scope = id => bindFn(creator.scope(id), dispatch);
+        return boundFactory;
     } else if (isFunction(creator)) {
         return bindFn(creator, dispatch);
     }
