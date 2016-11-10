@@ -21,7 +21,7 @@
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
     "build:umd": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack",
     "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack",
-    "counters": "cross-env BABEL_ENV=cjs babel-node examples/counters/server.js"
+    "counters": "cross-env BABEL_ENV=examples babel-node examples/counters/server.js"
   },
   "repository": {
     "type": "git",

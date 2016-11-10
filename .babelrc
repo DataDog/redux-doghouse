@@ -1,8 +1,16 @@
 {
-    "presets": ["es2015", "stage-3", "react"],
     "env": {
         "es": {
             "presets": ["stage-3"]
+        },
+        "umd": {
+            "presets": ["es2015", "stage-3"]
+        },
+        "commonjs": {
+            "presets": ["es2015", "stage-3"]
+        },
+        "examples": {
+            "presets": ["es2015", "stage-3", "react"]
         }
     }
 }
