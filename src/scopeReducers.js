@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { memoize } from './helpers/memoize';
-import { isString } from 'lodash';
 
 import * as object from './helpers/object-shim';
 
@@ -13,7 +12,7 @@ const _scopeReducers = memoize((reducers, id) => {
     const reduce = combineReducers(reducers);
     return (state, action) => {
         const matchesID = action.scopeID && action.scopeID === id;
-        const isInitAction = action.type && isString(action.type) &&
+        const isInitAction = action.type && typeof action.type === 'string' &&
                              action.type.slice(0, 8) === '@@redux/';
         if (matchesID || isInitAction) {
             return reduce(state, action);

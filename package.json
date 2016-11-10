@@ -38,9 +38,6 @@
     "Zacqary Adam Xeper <zacqary@datadog.com> (https://github.com/zacqary)"
   ],
   "license": "MIT",
-  "dependencies": {
-    "lodash": "4.16.4"
-  },
   "peerDependencies": {
     "redux": "3.x"
   },

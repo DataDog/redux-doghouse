@@ -1,5 +1,3 @@
-import { isObject } from 'lodash';
-
 /**
  * memoize
  * Caches the results of a function when the arguments are the same.
@@ -29,7 +27,7 @@ export const memoize = (fn) => (...args) => {
         if (!result.has(arg)) {
             if (i === array.length - 1) {
                 result.set(arg, fn(...args));
-            } else if (isObject(array[i + 1])) {
+            } else if (typeof array[i + 1] === 'object') {
                 result.set(arg, new WeakMap());
             } else {
                 result.set(arg, new Map());

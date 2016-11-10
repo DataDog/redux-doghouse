@@ -1,5 +1,4 @@
 import { memoize } from './helpers/memoize';
-import { mapValues, isNull, isUndefined, isFunction } from 'lodash';
 
 import * as object from './helpers/object-shim';
 
@@ -17,7 +16,11 @@ const scopeActionDeep = (actionCreator, id) => {
         case 'function':
             return scopeAction(actionCreator, id);
         case 'object':
-            return mapValues(actionCreator, c => scopeActionDeep(c, id));
+            return object.entries(actionCreator).reduce(
+                (result, [key, c]) => ({
+                    ...result,
+                    [key]: scopeActionDeep(c, id)
+                }), {});
         default:
             return actionCreator;
     }
@@ -27,8 +30,8 @@ export const scopeActionCreators = memoize(
     // additional scopeID param, allowing multiple instances of the same
     // component to distinguish their actions from one another
     (creators, id) => {
-        if (isNull(id) || isUndefined(id)) return creators;
-        if (isFunction(creators)) {
+        if (id === null || typeof id === 'undefined') return creators;
+        if (typeof creators === 'function') {
             return scopeAction(creators, id);
         }
         return object.entries(creators).reduce(

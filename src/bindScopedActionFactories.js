@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux';
 import { ScopedActionFactory } from './ScopedActionFactory';
-import { isFunction } from 'lodash';
 import * as object from './helpers/object-shim';
 
 // Actions
@@ -12,7 +11,7 @@ const bindScopedActionFactory = (creator, dispatch, bindFn) => {
         const boundFactory = new ScopedActionFactory();
         boundFactory.scope = id => bindFn(creator.scope(id), dispatch);
         return boundFactory;
-    } else if (isFunction(creator)) {
+    } else if (typeof creator === 'function') {
         return bindFn(creator, dispatch);
     }
 };
@@ -21,7 +20,7 @@ export const bindScopedActionFactories = (
     creators, dispatch, bindFn = bindActionCreators
 ) => {
     const isCreator = c =>
-        c instanceof ScopedActionFactory || isFunction(c);
+        c instanceof ScopedActionFactory || typeof c === 'function';
     if (isCreator(creators)) {
         return bindScopedActionFactory(creators, dispatch, bindFn);
     }
