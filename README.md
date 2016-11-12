@@ -4,7 +4,7 @@
 
 It includes tools to help you build **Scoped Actions** and **Scoped Reducers** with minimal modifications to your code. That way, if you build a Redux store for a `Parent` with an **arbitrary number** of `Children` (meaning there can be none, one, or a million of them), actions affecting `Child A` won't affect `Child B` through `Child Z`.
 
-# Why Use `redux-doghouse`?
+# Why Use redux-doghouse?
 Let's say you've built a complex widget called `QueryEditor` which allows the user to generate queries to your application. It listens for a whole bunch of different actions, like `SET_GROUP`, `SET_FUNCTION`, `SET_SCOPE`, etc., to change the different parameters of the query.
 
 Now you want to build an `ExpressionEditor`, which lets the user build a whole expression of two, three, four, or more queries. But you don't just want to put a bunch of `QueryEditor`s together and call it a day, because your application has some very specific requirements: all queries in an expression need to have the same group, or some queries with certain functions can't be in the same expression with other function, or some scopes can only be used once per expression.
@@ -18,7 +18,7 @@ npm install redux-doghouse
 ```
 
 ## Running Examples
-### Counters
+### Counters ([Live Demo](https://redux-doghouse-example.now.sh/))
 An app that renders an arbitrary number of `<Counter>`s, with the ability to change the value of one of them at a time, all of them at once, or only the ones with even or odd numbers
 ```
 npm run counters
