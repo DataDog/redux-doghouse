@@ -1,3 +1,20 @@
+header {
+  width: 90vw;
+  text-align: center;
+  margin: auto;
+}
+
+header p {
+  font-size: 14pt;
+}
+
+header .code {
+  color: #f44;
+  background: #e0e0e0;
+  font-family: monospace;
+  padding: 4px;
+}
+
 .App {
   text-align: center;
 }
