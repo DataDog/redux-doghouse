@@ -4,13 +4,6 @@
 
 It includes tools to help you build **Scoped Actions** and **Scoped Reducers** with minimal modifications to your code. That way, if you build a Redux store for a `Parent` with an **arbitrary number** of `Children` (meaning there can be none, one, or a million of them), actions affecting `Child A` won't affect `Child B` through `Child Z`.
 
-# Why Use redux-doghouse?
-Let's say you've built a complex widget called `QueryEditor` which allows the user to generate queries to your application. It listens for a whole bunch of different actions, like `SET_GROUP`, `SET_FUNCTION`, `SET_SCOPE`, etc., to change the different parameters of the query.
-
-Now you want to build an `ExpressionEditor`, which lets the user build a whole expression of two, three, four, or more queries. But you don't just want to put a bunch of `QueryEditor`s together and call it a day, because your application has some very specific requirements: all queries in an expression need to have the same group, or some queries with certain functions can't be in the same expression with other function, or some scopes can only be used once per expression.
-
-**You need your higher-level component to listen to, and manipulate, each instance of your lower-level component individually.** That's what's great about Redux — just put them all in your higher-level component's store. But you also want to make sure a `SET_GROUP` action from `QueryEditor` A doesn't affect `QueryEditor`s B, C, D, and so on. That's where `redux-doghouse` comes in.
-
 # Getting Started
 ## Installation
 ```
@@ -23,6 +16,14 @@ An app that renders an arbitrary number of `<Counter>`s, with the ability to cha
 ```
 npm run counters
 ```
+
+
+# Why Use redux-doghouse?
+Let's say you've built a complex widget called `QueryEditor` which allows the user to generate queries to your application. It listens for a whole bunch of different actions, like `SET_GROUP`, `SET_FUNCTION`, `SET_SCOPE`, etc., to change the different parameters of the query.
+
+Now you want to build an `ExpressionEditor`, which lets the user build a whole expression of two, three, four, or more queries. But you don't just want to put a bunch of `QueryEditor`s together and call it a day, because your application has some very specific requirements: all queries in an expression need to have the same group, or some queries with certain functions can't be in the same expression with other function, or some scopes can only be used once per expression.
+
+**You need your higher-level component to listen to, and manipulate, each instance of your lower-level component individually.** That's what's great about Redux — just put them all in your higher-level component's store. But you also want to make sure a `SET_GROUP` action from `QueryEditor` A doesn't affect `QueryEditor`s B, C, D, and so on. That's where `redux-doghouse` comes in.
 
 # API
 1. [scopeActionCreators](#scopeactioncreatorsactioncreators-scopeID)
