@@ -14,8 +14,9 @@
   "scripts": {
     "clean": "rimraf lib dist es",
     "lint": "eslint src",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "npm run clean && npm run build",
+    "test": "cross-env BABEL_ENV=commonjs jest",
+    "check:src": "npm run lint && npm run test",
+    "prepublish": "npm run clean && npm run check:src && npm run build",
     "build": "npm run build:commonjs && npm run build:umd && npm run build:umd:min && npm run build:es",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
     "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
@@ -54,6 +55,7 @@
     "eslint": "3.7.1",
     "eslint-plugin-react": "6.4.1",
     "express": "^4.14.0",
+    "jest": "17.0.3",
     "postcss-loader": "0.13.0",
     "react": "15.3.2",
     "react-dom": "15.3.2",
@@ -63,5 +65,8 @@
     "webpack": "^1.13.3",
     "webpack-dev-middleware": "1.8.4",
     "webpack-hot-middleware": "2.13.0"
-  }
+    },
+    "jest": {
+        "testRegex": "(/test/.*\\.spec.js)$"
+    }
 }

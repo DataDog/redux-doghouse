@@ -1,9 +1,7 @@
-import { memoize } from './helpers/memoize';
+import { memoize } from './utils/memoize';
 
-import * as object from './helpers/object-shim';
+import * as object from './utils/object-shim';
 
-// Actions
-// =======
 const scopeAction = (actionCreator, id) => (...args) => ({
     // Pass the args into the action creator, and spread
     // all the props it returns
@@ -16,13 +14,16 @@ const scopeActionDeep = (actionCreator, id) => {
         case 'function':
             return scopeAction(actionCreator, id);
         case 'object':
+            if (!actionCreator) {
+                throw new Error('Cannot scope null');
+            }
             return object.entries(actionCreator).reduce(
                 (result, [key, c]) => ({
                     ...result,
                     [key]: scopeActionDeep(c, id)
                 }), {});
         default:
-            return actionCreator;
+            throw new Error('Can only scope a function or object');
     }
 };
 export const scopeActionCreators = memoize(
@@ -30,15 +31,27 @@ export const scopeActionCreators = memoize(
     // additional scopeID param, allowing multiple instances of the same
     // component to distinguish their actions from one another
     (creators, id) => {
-        if (id === null || typeof id === 'undefined') return creators;
+        if (typeof id !== 'string' && typeof id !== 'number') {
+            const idStr = typeof id === 'symbol' ? id.toString() : id;
+            throw new Error(
+                `scopeActionCreators cannot scope for an id of ${idStr} - ` +
+                'expecting a String or Number'
+            );
+        }
         if (typeof creators === 'function') {
             return scopeAction(creators, id);
         }
         return object.entries(creators).reduce(
-            (result, [key, actionCreator]) => ({
-                ...result,
-                [key]: scopeActionDeep(actionCreator, id)
-            })
+            (result, [key, actionCreator]) => {
+                try {
+                    return {
+                        ...result,
+                        [key]: scopeActionDeep(actionCreator, id)
+                    };
+                } catch (e) {
+                    return result;
+                }
+            }
         , { __scope__: id });
     }
 );

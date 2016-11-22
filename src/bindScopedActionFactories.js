@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { ScopedActionFactory } from './ScopedActionFactory';
-import * as object from './helpers/object-shim';
+import * as object from './utils/object-shim';
 
 // Actions
 // =======
@@ -23,11 +23,18 @@ export const bindScopedActionFactories = (
         c instanceof ScopedActionFactory || typeof c === 'function';
     if (isCreator(creators)) {
         return bindScopedActionFactory(creators, dispatch, bindFn);
+    } else if (!creators || typeof creators !== 'object') {
+        throw new Error(
+            'bindScopedActionFactories expected an object or a function ' +
+            `instead of ${creators}`
+        );
     }
     return object.entries(creators).reduce((result, [key, creator]) => {
         if (isCreator(creator)) {
             result[key] = bindScopedActionFactory(creator, dispatch, bindFn);
+        } else if (typeof creator === 'object') {
+            result[key] = bindScopedActionFactories(creator, dispatch, bindFn);
         }
         return result;
-    });
+    }, {});
 };
