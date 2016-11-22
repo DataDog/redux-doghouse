@@ -31,9 +31,11 @@ export const scopeActionCreators = memoize(
     // additional scopeID param, allowing multiple instances of the same
     // component to distinguish their actions from one another
     (creators, id) => {
-        if (id === null || typeof id === 'undefined') {
+        if (typeof id !== 'string' && typeof id !== 'number') {
+            const idStr = typeof id === 'symbol' ? id.toString() : id;
             throw new Error(
-                `scopeActionCreators cannot scope for an id of ${id}`
+                `scopeActionCreators cannot scope for an id of ${idStr} - ` +
+                'expecting a String or Number'
             );
         }
         if (typeof creators === 'function') {

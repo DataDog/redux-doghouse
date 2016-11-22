@@ -10,7 +10,7 @@ describe('scopeActionCreators', () => {
     let unscopedActionA;
     let unscopedActionB;
     beforeEach(() => {
-        testScopes = ['x', 4, Symbol('Test Scope'), { 'foo': 'bar' }];
+        testScopes = ['x', 'y', 'z', '4'];
         TEST_VALUE = Symbol('TEST_VALUE');
         unscopedActionA = testActionA();
         unscopedActionB = testActionB(TEST_VALUE);
@@ -66,6 +66,22 @@ describe('scopeActionCreators', () => {
                 scopeActionCreators(testCase, undefined);
             }).toThrow(
                 'scopeActionCreators cannot scope for an id of undefined'
+            );
+        });
+    });
+
+    it('throws on a non-string or non-number ID', () => {
+        const testCases = [testActionA, actionCreators];
+        testCases.forEach(testCase => {
+            expect(() => {
+                scopeActionCreators(testCase, Symbol('Test'));
+            }).toThrow(
+                'scopeActionCreators cannot scope for an id of Symbol(Test)'
+            );
+            expect(() => {
+                scopeActionCreators(testCase, {});
+            }).toThrow(
+                'scopeActionCreators cannot scope for an id of [object Object]'
             );
         });
     });

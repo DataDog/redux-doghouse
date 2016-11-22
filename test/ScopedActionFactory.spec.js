@@ -10,7 +10,7 @@ describe('ScopedActionFactory', () => {
     let unscopedActionA;
     let unscopedActionB;
     beforeEach(() => {
-        testScopes = ['x', 4, Symbol('Test Scope'), { 'foo': 'bar' }];
+        testScopes = ['x', 'y', 'z', 4];
         TEST_VALUE = Symbol('TEST_VALUE');
         unscopedActionA = testActionA();
         unscopedActionB = testActionB(TEST_VALUE);
