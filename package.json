@@ -1,6 +1,6 @@
 {
   "name": "redux-doghouse",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Scoping helpers for building reusable components with Redux",
   "main": "lib/index.js",
   "module": "es/index.js",
