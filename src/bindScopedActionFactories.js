@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { ScopedActionFactory } from './ScopedActionFactory';
-import * as object from './helpers/object-shim';
+import * as object from './utils/object-shim';
 
 // Actions
 // =======

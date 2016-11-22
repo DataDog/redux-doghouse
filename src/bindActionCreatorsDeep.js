@@ -2,7 +2,7 @@ import { bindActionCreators } from 'redux';
 import { bindScopedActionFactories } from './bindScopedActionFactories';
 import { ScopedActionFactory } from './ScopedActionFactory';
 
-import * as object from './helpers/object-shim';
+import * as object from './utils/object-shim';
 
 // Recursively bind a tree of action creators
 const bindActionsDeep = (creators, dispatch) => {

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { memoize } from './helpers/memoize';
+import { memoize } from './utils/memoize';
 
-import * as object from './helpers/object-shim';
+import * as object from './utils/object-shim';
 
 // Reducers
 // ========
